@@ -21,7 +21,7 @@ class StoryDetailPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      ListTile( 
+                      ListTile(
                         title: Text("Title"),
                         subtitle: Text(story.title),
                       ),

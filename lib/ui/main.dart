@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'BookmarksPage.dart';
-import 'LatestNewsPage.dart';
+import 'TopStoriesPage.dart';
 import '../assets/Strings.dart';
 
 void main() {
@@ -10,7 +10,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   List<Widget> bodyWidgets = [
-    LatestNewsPage(),
+    TopStoriesPage(),
     BookmarksPage(),
   ];
 
