@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/root_widget.dart';
 
 import 'BookmarksPage.dart';
 import 'TopStoriesPage.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       home: DefaultTabController(
         length: 2,
         child: Scaffold(

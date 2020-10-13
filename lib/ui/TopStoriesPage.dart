@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertask/data/network/HttpService.dart';
 import 'package:fluttertask/data/network/models/StorySchema.dart';
 import 'package:fluttertask/ui/TopStoriesViewModel.dart';
+import 'package:fluttertask/utils/utils.dart';
+import 'package:get/route_manager.dart';
 import 'StoryDetailPage.dart';
 
 class TopStoriesPage extends StatefulWidget {
@@ -22,29 +23,15 @@ class _LatestNewsPage extends State<TopStoriesPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: FutureBuilder(
         future: _topStoriesViewModel.getStories(),
         builder:
             (BuildContext context, AsyncSnapshot<List<StorySchema>> snapshot) {
           if (snapshot.hasData) {
-            List<StorySchema> posts = snapshot.data;
+            List<StorySchema> stories = snapshot.data;
             return ListView(
-              children: posts
-                  .map(
-                    (StorySchema story) => ListTile(
-                      title: Text(story.title),
-                      subtitle: Text("${story.title}"),
-                      onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => StoryDetailPage(
-                            story: story,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                  .toList(),
+              children: stories
+                  .map((StorySchema story) => _createListTile(story),).toList(),
             );
           } else {
             return Center(child: CircularProgressIndicator());
@@ -53,43 +40,27 @@ class _LatestNewsPage extends State<TopStoriesPage>
       ),
     );
   }
-}
 
-//class LatestNewsPage extends StatelessWidget {
-//  final HttpService httpService = HttpService();
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return Scaffold(
-//      appBar: AppBar(),
-//      body: FutureBuilder(
-//        future: httpService.getStories(),
-//        builder:
-//            (BuildContext context, AsyncSnapshot<List<StorySchema>> snapshot) {
-//          if (snapshot.hasData) {
-//            List<StorySchema> posts = snapshot.data;
-//            return ListView(
-//              children: posts
-//                  .map(
-//                    (StorySchema story) => ListTile(
-//                      title: Text(story.title),
-//                      subtitle: Text("${story.title}"),
-//                      onTap: () => Navigator.of(context).push(
-//                        MaterialPageRoute(
-//                          builder: (context) => StoryDetailPage(
-//                            story: story,
-//                          ),
-//                        ),
-//                      ),
-//                    ),
-//                  )
-//                  .toList(),
-//            );
-//          } else {
-//            return Center(child: CircularProgressIndicator());
-//          }
-//        },
-//      ),
-//    );
-//  }
-//}
+  void _navigate(StorySchema story) {
+    //NOTE: Here, I used the GetX Library , it's light and simple ,
+    // it abstracts sevceral lines of code to navigate between widgets!
+    Get.to(StoryDetailPage(
+      story: story,
+    ));
+  }
+
+  Widget _createListTile(StorySchema story) { // create list item (tile) for each story object!
+    return ListTile(
+        leading: CircleAvatar(
+          radius: 30.0,
+          backgroundImage: NetworkImage("${story?.multimedia[0]?.url}"),
+          backgroundColor: Colors.grey.shade800,
+        ),
+        title: Text(story.title),
+        subtitle:
+//            Text(Utils().getFormattedDate(story.publishedDate).toString()),
+        Text(story.publishedDate),
+
+        onTap: () => _navigate(story));
+  }
+}

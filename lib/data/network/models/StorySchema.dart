@@ -76,10 +76,10 @@ class StorySchema {
     _url = json["url"];
     _uri = json["uri"];
     _byline = json["byline"];
-    _itemType = json["itemType"];
-    _updatedDate = json["updatedDate"];
-    _createdDate = json["createdDate"];
-    _publishedDate = json["publishedDate"];
+    _itemType = json["item_type"];
+    _updatedDate = json["updated_date"];
+    _createdDate = json["created_date"];
+    _publishedDate = json["published_date"];
 
     if (json["multimedia"] != null) {
       _multimedia = [];
@@ -99,10 +99,10 @@ class StorySchema {
     map["url"] = _url;
     map["uri"] = _uri;
     map["byline"] = _byline;
-    map["itemType"] = _itemType;
-    map["updatedDate"] = _updatedDate;
-    map["createdDate"] = _createdDate;
-    map["publishedDate"] = _publishedDate;
+    map["item_type"] = _itemType;
+    map["updated_date"] = _updatedDate;
+    map["created_date"] = _createdDate;
+    map["published_date"] = _publishedDate;
 
     if (_multimedia != null) {
       map["multimedia"] = _multimedia.map((v) => v.toJson()).toList();
