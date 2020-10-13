@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             bottom: TabBar(
               tabs: [
-                Tab(icon: Icon(Icons.directions_car)),
-                Tab(icon: Icon(Icons.directions_transit)),
+                Tab(icon: Icon(Icons.fiber_new)),
+                Tab(icon: Icon(Icons.bookmark)),
               ],
             ),
             title: Text(Strings.latestNews),

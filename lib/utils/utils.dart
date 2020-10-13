@@ -1,8 +1,8 @@
 import 'package:intl/intl.dart';
 
 class Utils {
-  DateTime getFormattedDate(String dateString) {
-    DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
-    return dateFormat.parse(dateString);
+  String getFormattedDate(String dateString) { // iso date formatter
+    DateTime dateTime = DateTime.parse(dateString);
+    return DateFormat('EEE, MMM d, ''hh:mm aaa').format(dateTime);
   }
 }

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:fluttertask/data/network/models/ApiResponse.dart';
-import 'package:fluttertask/data/network/models/StorySchema.dart';
+import 'package:fluttertask/data/models/ApiResponse.dart';
+import 'package:fluttertask/data/models/StorySchema.dart';
 import 'package:http/http.dart';
 
 class HttpService {

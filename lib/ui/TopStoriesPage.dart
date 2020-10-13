@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertask/data/network/models/StorySchema.dart';
+import 'package:fluttertask/data/models/StorySchema.dart';
+
+//import 'package:fluttertask/data/network/models/StorySchema.dart';
 import 'package:fluttertask/ui/TopStoriesViewModel.dart';
 import 'package:fluttertask/utils/utils.dart';
 import 'package:get/route_manager.dart';
@@ -31,7 +33,10 @@ class _LatestNewsPage extends State<TopStoriesPage>
             List<StorySchema> stories = snapshot.data;
             return ListView(
               children: stories
-                  .map((StorySchema story) => _createListTile(story),).toList(),
+                  .map(
+                    (StorySchema story) => _createListTile(story),
+                  )
+                  .toList(),
             );
           } else {
             return Center(child: CircularProgressIndicator());
@@ -49,18 +54,32 @@ class _LatestNewsPage extends State<TopStoriesPage>
     ));
   }
 
-  Widget _createListTile(StorySchema story) { // create list item (tile) for each story object!
-    return ListTile(
-        leading: CircleAvatar(
-          radius: 30.0,
-          backgroundImage: NetworkImage("${story?.multimedia[0]?.url}"),
-          backgroundColor: Colors.grey.shade800,
-        ),
-        title: Text(story.title),
-        subtitle:
-//            Text(Utils().getFormattedDate(story.publishedDate).toString()),
-        Text(story.publishedDate),
+  Widget _createListTile(StorySchema story) {
+    // create list item (tile) for each story object!
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        borderOnForeground: true,
+        elevation: 1,
+        shadowColor: Colors.grey,
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          child: ListTile(
+              leading: CircleAvatar(
+                radius: 30.0,
+                backgroundImage: NetworkImage("${story?.multimedia[0]?.url}"),
+                backgroundColor: Colors.grey.shade800,
+              ),
+              title: Text(story.title),
+              subtitle: Text(story.publishedDate),
 
-        onTap: () => _navigate(story));
+//            Text(Utils().getFormattedDate(story.publishedDate).toString()),
+
+              onTap: () => _navigate(story)),
+        ),
+      ),
+    );
   }
 }
