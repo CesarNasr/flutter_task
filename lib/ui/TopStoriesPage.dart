@@ -6,21 +6,34 @@ import 'package:fluttertask/ui/TopStoriesViewModel.dart';
 import 'package:fluttertask/utils/utils.dart';
 import 'package:get/route_manager.dart';
 import 'StoryDetailPage.dart';
+import 'StoryDetailPageViewModel.dart';
 
 class TopStoriesPage extends StatefulWidget {
-  const TopStoriesPage({Key key}) : super(key: key);
+  TopStoriesViewModel topStoriesViewModel;
+  StoryDetailPageViewModel storyDetailPageViewModel;
+
+  TopStoriesPage(
+    this.storyDetailPageViewModel,
+    this.topStoriesViewModel,
+  );
 
   @override
-  _LatestNewsPage createState() => _LatestNewsPage();
+  _LatestNewsPage createState() =>
+      _LatestNewsPage(topStoriesViewModel, storyDetailPageViewModel);
 }
 
 class _LatestNewsPage extends State<TopStoriesPage>
     with AutomaticKeepAliveClientMixin<TopStoriesPage> {
+  TopStoriesViewModel _topStoriesViewModel;
+  StoryDetailPageViewModel _storyDetailPageViewModel;
+
+  _LatestNewsPage(this._topStoriesViewModel, this._storyDetailPageViewModel);
+
   @override
   // to keep the tab alive (not refreshed after each swipe!)a
   bool get wantKeepAlive => true;
 
-  final TopStoriesViewModel _topStoriesViewModel = TopStoriesViewModel();
+//  final TopStoriesViewModel _topStoriesViewModel = TopStoriesViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +59,12 @@ class _LatestNewsPage extends State<TopStoriesPage>
     );
   }
 
-  void _navigate(StorySchema story) {
+  void _navigate(
+      StorySchema story, StoryDetailPageViewModel storyDetailPageViewModel) {
     //NOTE: Here, I used the GetX Library , it's light and simple ,
     // it abstracts sevceral lines of code to navigate between widgets!
     Get.to(StoryDetailPage(
+      storyDetailPageViewModel,
       story: story,
     ));
   }
@@ -73,11 +88,8 @@ class _LatestNewsPage extends State<TopStoriesPage>
                 backgroundColor: Colors.grey.shade800,
               ),
               title: Text(story.title),
-              subtitle: Text(story.publishedDate),
-
-//            Text(Utils().getFormattedDate(story.publishedDate).toString()),
-
-              onTap: () => _navigate(story)),
+              subtitle: Text( Utils().getFormattedDate(story.publishedDate)),
+              onTap: () => _navigate(story, _storyDetailPageViewModel)),
         ),
       ),
     );

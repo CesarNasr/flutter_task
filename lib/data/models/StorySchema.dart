@@ -148,10 +148,5 @@ class StorySchema {
     return data;
   }
 
-//  String getFormattedPublishedDate() {
-//    Utils utils = Utils();
-//
-//    // always return the published date in a formatted form
-//    return utils.getFormattedDate();
-//  }
+
 }

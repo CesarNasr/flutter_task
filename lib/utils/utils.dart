@@ -5,4 +5,6 @@ class Utils {
     DateTime dateTime = DateTime.parse(dateString);
     return DateFormat('EEE, MMM d, ''hh:mm aaa').format(dateTime);
   }
+
+
 }

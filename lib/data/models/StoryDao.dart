@@ -14,10 +14,14 @@ abstract class StoryDao {
   @Query('SELECT * FROM StorySchema')
   Future<List<StorySchema>> getAllStories();
 
-  @insert
+  @Insert(
+      onConflict: OnConflictStrategy
+          .replace) // replace the element if it already exists in db
   Future<int> insertStory(StorySchema story);
 
-//  @transaction
+  @delete
+  Future<int> deleteStory(StorySchema story);
+
   Future<void> insertStoryWithCorrespondingMedia(
       StorySchema storySchema, AppDatabase database) async {
     final multimediaDao = database.multiMediaDao;
@@ -31,7 +35,6 @@ abstract class StoryDao {
     }
   }
 
-//  @transaction
   Future<List<StorySchema>> getAllStoriesWithCorrespondingMedia(
       AppDatabase database) async {
     final multimediaDao = database.multiMediaDao;
@@ -41,9 +44,14 @@ abstract class StoryDao {
     for (int i = 0; i < stories.length; i++) {
       List<Multimedia> multimediaList =
           await multimediaDao.findMultimediaByStoryId(stories[i].id);
-
-      stories[i].mMultimedia = multimediaList;
+      stories[i].multimedia = multimediaList;
     }
+
+    List<StorySchema> x = List();
+    x.add(StorySchema());
+    x.add(StorySchema());
+    x.add(StorySchema());
+    x.add(StorySchema());
 
     return stories;
   }
