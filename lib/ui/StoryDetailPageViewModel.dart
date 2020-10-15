@@ -16,7 +16,4 @@ class StoryDetailPageViewModel {
     return repository.insertStory(storySchema);
   }
 
-//  Future<void> getAllStories() async {
-//    return await repository.getAllStories();
-//  }
 }

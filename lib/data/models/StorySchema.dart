@@ -9,8 +9,7 @@ class StorySchema {
   @ignore
   List<Multimedia> mMultimedia;
 
-//  @ColumnInfo(name: "multimediaId", nullable: true)
-//  String multimediaId;
+
 
   @ColumnInfo(name: "title", nullable: true)
   String title;
@@ -53,25 +52,6 @@ class StorySchema {
   @ColumnInfo()
   String shortUrl;
 
-//  StorySchema(
-//      {this.section,
-//        this.subsection,
-//        this.title,
-//        this.abstract,
-//        this.url,
-//        this.uri,
-//        this.byline,
-//        this.itemType,
-//        this.updatedDate,
-//        this.createdDate,
-//        this.publishedDate,
-//        this.materialTypeFacet,
-//        this.kicker,
-//        this.desFacet,
-//        this.orgFacet,
-//        this.perFacet,
-//        this.multimedia,
-//        this.shortUrl});
 
   StorySchema(
       {this.id,

@@ -38,13 +38,6 @@ class MyApp extends StatelessWidget {
     ];
   }
 
-
-//  = [
-//    TopStoriesPage(topStoriesViewModel),
-//    BookmarksPage(storyDetailPageViewModel, bookmarksViewModels),
-//  ];
-
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
